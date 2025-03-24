@@ -6,28 +6,19 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import ApproveRejectButtons from "@/components/ApproveRejectButtons";
 
-const page = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
-  const { userId } = await auth();
+type Params = Promise<{ id: string }>;
 
+export default async function Page({ params }: { params: Params }) {
+  const { id } = await params;
+
+  const { userId } = await auth();
   if (!userId) {
     redirect("/");
   }
 
-  const { id } = await params;
-
   const request = await prisma.timeOffRequest.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      employee: true,
-    },
+    where: { id },
+    include: { employee: true },
   });
 
   if (!request) {
@@ -35,21 +26,13 @@ const page = async ({
   }
 
   const employee = await prisma.user.findUnique({
-    where: {
-      id: request?.employeeId,
-    },
-    include: {
-      company: true,
-    },
+    where: { id: request.employeeId },
+    include: { company: true },
   });
 
   const manager = await prisma.user.findUnique({
-    where: {
-      clerkId: userId,
-    },
-    include: {
-      company: true,
-    },
+    where: { clerkId: userId },
+    include: { company: true },
   });
 
   if (manager?.companyId !== employee?.companyId) {
@@ -67,7 +50,6 @@ const page = async ({
         </div>
         {request.status === "PENDING" && <ApproveRejectButtons id={id} />}
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="rounded-lg border bg-card text-card-foreground shadow-sm">
           <div className="p-6 flex flex-col space-y-1.5">
@@ -88,7 +70,7 @@ const page = async ({
                       : "destructive"
                   }
                 >
-                  {request.status.charAt(0) + request.status.charAt(1)}
+                  {request.status}
                 </Badge>
               </dd>
               <div className="space-y-1">
@@ -177,6 +159,4 @@ const page = async ({
       </div>
     </div>
   );
-};
-
-export default page;
+}
