@@ -6,20 +6,14 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import ApproveRejectButtons from "@/components/ApproveRejectButtons";
 
-const page = async ({
-  params,
-}: {
-  params: {
-    id: string;
-  };
-}) => {
+const page = async ({ params }: { params: { id: string } }) => {  // ✅ Correct params typing
   const { userId } = await auth();
 
   if (!userId) {
     redirect("/");
   }
 
-  const { id } = await params;
+  const { id } = params;
 
   const request = await prisma.timeOffRequest.findUnique({
     where: {
