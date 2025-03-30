@@ -47,8 +47,9 @@ export default async function Home() {
         </nav>
         <div className="flex gap-4">
         <SignedOut>
-          <SignInButton 
-          />
+          <Button asChild>
+            <SignInButton />
+          </Button>
         </SignedOut>
         <SignedIn>
           <UserButton />
