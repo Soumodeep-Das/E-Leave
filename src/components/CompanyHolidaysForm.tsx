@@ -253,7 +253,7 @@ const CompanyHolidaysForm = ({
           </Button>
           <h1 className="text-3xl font-bold">Company Holidays</h1>
           <p className="text-gray-500">
-            Manage your comapny-wide holidays and time off calendar.
+            Manage your company-wide holidays and time off calendar.
           </p>
         </div>
         <Dialog

@@ -150,7 +150,7 @@ const page = async () => {
         <Card>
           <CardHeader>
             <CardTitle>Team management</CardTitle>
-            <CardDescription>Manage your company`&apos;`s team</CardDescription>
+            <CardDescription>Manage your company&apos;s team</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="flex flex-col space-y-2">
