@@ -193,7 +193,7 @@ const OnboardingForm = ({
           Complete your account setup
         </CardTitle>
         <CardDescription>
-          Weclome to TimeOffer! Let&apos;s get you onboarded.
+          Weclome to OffDuty! Let&apos;s get you onboarded.
         </CardDescription>
       </CardHeader>
       <CardContent>
